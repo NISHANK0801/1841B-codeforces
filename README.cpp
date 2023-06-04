@@ -1,57 +1,39 @@
-# 1839B-codeforces
+# 1353C-codeforces
 
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 #define ll long long int
- 
-struct C {
-    bool operator()(pair<ll, ll>& p1,pair<ll, ll>& p2)  {
-        if (p1.first == p2.first)
-            return p1.second < p2.second;
-        else
-            return p1.first > p2.first;
+
+
+ll solve(ll n)
+{
+    ll k=1;
+    ll w=-1;
+    ll sum=0;
+    ll i=0;
+    while(k!=(n+2))
+    {
+    
+        sum+=(2*k*i)+(2*i*w);
+        k+=2;
+        w+=2;
+        i++;
     }
-};
- 
-int main() {
-    ll t;
-    cin >> t;
-    while (t--) {
-        priority_queue<pair<ll, ll>, vector<pair<ll, ll>>, C> pq;
-        ll n;
-        cin >> n;
-        ll a[n], b[n];
-        for (ll i = 0; i < n; i++) {
-            cin >> a[i] >> b[i];
-        }
-        for (ll i = 0; i < n; i++) {
-            pq.push({a[i], b[i]});
-        }
-        ll sum = 0, bulb_break = 0, k = 0;
-        while (!pq.empty()) {
-            auto item = pq.top();
-            a[k] = item.first;
-            b[k] = item.second;
-            pq.pop();
-            k++;
-        }
- 
-        ll x = 0,c[n+1]={0};  // Number of lamps turned on
-        for (ll i = 0; i < n; i++) 
+    return sum;
+}
+
+int main()
+{
+    
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(NULL);
+        ll t;
+        cin>>t;
+        while(t--)
         {
-            if(c[a[i]]>=a[i])
-            {
-                continue;
-            }
-            else
-            {
-                sum+=b[i];
-            }
-            c[a[i]]++;
+            ll n;
+            cin>>n;
+            cout<<solve(n)<<endl;
         }
-        cout<<endl;
-        cout << sum << endl;
-    }
- 
-    return 0;
 }
