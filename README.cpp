@@ -1,39 +1,76 @@
-# 1353C-codeforces
+# 1841B-codeforces
 
+#include<stdio.h>
 #include<bits/stdc++.h>
+#define ll long long int 
 using namespace std;
-#define ll long long int
-
-
-ll solve(ll n)
-{
-    ll k=1;
-    ll w=-1;
-    ll sum=0;
-    ll i=0;
-    while(k!=(n+2))
-    {
-    
-        sum+=(2*k*i)+(2*i*w);
-        k+=2;
-        w+=2;
-        i++;
-    }
-    return sum;
-}
 
 int main()
 {
-    
-        ios_base::sync_with_stdio(false);
-        cin.tie(NULL);
-        cout.tie(NULL);
-        ll t;
-        cin>>t;
-        while(t--)
+   ios_base::sync_with_stdio(false);
+   cin.tie(NULL);
+   cout.tie(NULL);
+   ll t;
+   cin>>t;
+   while(t--)
+   {
+        ll n;
+        cin>>n;
+        ll a[n+1];
+        for(ll i=0;i<n;i++)
         {
-            ll n;
-            cin>>n;
-            cout<<solve(n)<<endl;
+            cin>>a[i];
         }
+        ll b,count=0,min,max,count2=0;
+        for(ll i=0;i<n;i++)
+        {
+            if(i==0)
+            {
+                max=a[i];
+                b=a[i];
+                cout<<1;
+            }
+            else if(a[i]>=max && count!=1 && count2!=1)
+            {
+                max=a[i];
+                cout<<1;
+            }
+            else if(a[i]<max && count!=1)
+            {
+                if(a[i]<=a[0])
+                {
+                    count=1;
+                    min=a[i];
+                    max=a[i-1];
+                    cout<<1;
+                }
+                else 
+                {
+                    cout<<0;
+                }
+                count2=1;
+            }
+            else
+            {
+                if(a[i]>=min && a[i]<=b && a[i]<=max)
+                {
+                    min=a[i];
+                    cout<<1;
+                }
+                else if(a[i]>=max && count!=1)
+                {
+                    max=a[i];
+                    cout<<1;
+                }
+                else
+                {
+                    cout<<0;
+                }
+            }
+           
+            
+        }
+         cout<<endl;
+   }
+   
 }
